@@ -1,0 +1,64 @@
+{
+  "name": "oxipresso-vscode",
+  "displayName": "Oxipresso Live Preview",
+  "description": "Live incremental TeX preview driven by the Oxipresso render server (TeXpresso-style: millisecond edits, editor<->preview sync)",
+  "version": "0.1.0",
+  "publisher": "EliorFoy",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "oxipresso.openPreview",
+        "title": "Oxipresso: Open Live Preview"
+      },
+      {
+        "command": "oxipresso.stop",
+        "title": "Oxipresso: Stop Render Server"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "oxipresso.openPreview",
+        "key": "ctrl+alt+o",
+        "when": "editorLangId == tex"
+      }
+    ],
+    "configuration": {
+      "title": "Oxipresso",
+      "properties": {
+        "oxipresso.enginePath": {
+          "type": "string",
+          "default": "oxipresso",
+          "description": "Path to the oxipresso render-server binary (built from the oxipresso repo, real-engine mode)"
+        },
+        "oxipresso.renderScale": {
+          "type": "number",
+          "default": 2,
+          "description": "Page render density multiplier over 96dpi (2 = 192dpi, crisp on hi-dpi displays)"
+        },
+        "oxipresso.formatPath": {
+          "type": "string",
+          "default": "",
+          "description": "Optional path to the texpresso.fmt engine format file (defaults to the binary's own resolution)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.4.0"
+  }
+}
